@@ -18,6 +18,18 @@ impl MOIndex {
     pub fn new(n: &str, o: Occupation) -> Self {
         MOIndex { o, n: n.to_owned() }
     }
+
+    pub fn isgen(&self) -> bool {
+        matches!(self.o, Gen)
+    }
+
+    pub fn isvir(&self) -> bool {
+        matches!(self.o, Vir)
+    }
+
+    pub fn isocc(&self) -> bool {
+        matches!(self.o, Occ)
+    }
 }
 
 pub fn gen(n: &str) -> MOIndex {
