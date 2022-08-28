@@ -1,21 +1,24 @@
 use std::fmt::Display;
 
-pub use Occupation::*;
+use Occupation::*;
+
+pub mod std_indices;
 
 #[derive(Debug, Clone, Copy)]
-pub enum Occupation {
+enum Occupation {
     Gen = 1,
     Vir,
     Occ,
 }
 
+#[derive(Clone)]
 pub struct MOIndex {
     o: Occupation,
     n: String,
 }
 
 impl MOIndex {
-    pub fn new(n: &str, o: Occupation) -> Self {
+    fn new(n: &str, o: Occupation) -> Self {
         MOIndex { o, n: n.to_owned() }
     }
 
@@ -48,7 +51,7 @@ impl Display for MOIndex {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         let col = match self.o {
             Gen => "",
-            Vir => "\x1b[91m",
+            Vir => "\x1b[36m",
             Occ => "\x1b[92m",
         };
         write!(f, "{}{}\x1b[39m", col, self.n)?;
